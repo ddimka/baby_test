@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-global.sendError = function (res, error, message, stack) {
+/*global.sendError = function (res, error, message, stack) {
     var response = {
         success: false,
         err: error
@@ -52,7 +52,7 @@ global.sendSuccess = function (res, result, code) {
     if (code)
         response.code = code;
     res.status(200).json(response);
-};
+};*/
 
 app.use(function (req, res, next) {
 
@@ -73,13 +73,14 @@ app.use(function (req, res, next) {
     next();
 });
 
+/*
 app.use(function (req, res, next) {
 
     if (req.originalUrl === "/check") {
         return sendSuccess(res, "Success");
     }else{
         if (req.method !== "OPTIONS" && req.method !== 'HEAD') {
-/*            Logger.fatal("----------------------------------------------------");
+/!*            Logger.fatal("----------------------------------------------------");
             Logger.fatal("IP address: " + req.headers['x-forwarded-for']);
             Logger.fatal("URL: " + req.method + " " + req.originalUrl);
             Logger.fatal("Admin: " + req.headers.admin);
@@ -87,13 +88,13 @@ app.use(function (req, res, next) {
             Logger.fatal("Apiary: " + req.headers.apiary);
             if (req.method === "POST" && req.originalUrl !== "/api/admin/permissions")
                 Logger.warn("Body: " + JSON.stringify(req.body, null, 4));
-            Logger.fatal("----------------------------------------------------");*/
+            Logger.fatal("----------------------------------------------------");*!/
         }else
             return next();
 
-/*        if (req.headers.apiary === "3sOydN3sOyd3sOydNR3sOydNR2M4fwc1fRwcPg1RhqhBrGi8jiqclMLMyuLMyui8jiqclMLMyurGi8jiqclMLMyu") {
+/!*        if (req.headers.apiary === "3sOydN3sOyd3sOydNR3sOydNR2M4fwc1fRwcPg1RhqhBrGi8jiqclMLMyuLMyui8jiqclMLMyurGi8jiqclMLMyu") {
             return next();
-        }*/
+        }*!/
 
         validateRequest();
     }
@@ -107,7 +108,7 @@ app.use(function (req, res, next) {
             return next();
         }else {
             Logger.error("Wrong request headers");
-            res.status(404).json({success: false, /*err: Errors.REQUEST_HEADERS_MISSING*/})
+            res.status(404).json({success: false, /!*err: Errors.REQUEST_HEADERS_MISSING*!/})
         }
 
         function validateLinks() {
@@ -135,6 +136,7 @@ app.use(function (req, res, next) {
     }
 
 });
+*/
 
 app.use('/', index);
 app.use('/users', users);
