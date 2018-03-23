@@ -107,4 +107,20 @@ dblogic.save = function (obj, isNew, callback) {
 };
 
 
+dblogic.getUserById = function (id, callback) {
+
+    var Model = require('../models/User');
+    Model.findById(id, function (err, object) {
+        return callback(err, object)
+    })
+};
+
+dblogic.getUsersByQuery = function (query, callback) {
+
+    var Model = require('../models/User');
+    Model.find(query, function (err, object) {
+        return callback(err, object)
+    })
+};
+
 module.exports = dblogic;

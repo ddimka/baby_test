@@ -44,10 +44,12 @@ router.get('/:id', function(req, res, next) {
 
     var userId = req.params.id;
 
-    DBLogic.findById("User", userId, function (err, user) {
+    DBLogic.getUserById(userId, function (err, user) {
+        if (err)
+            return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
 
-        return sendSuccess(res, user);
-    });
+        return sendSuccess(res, user)
+    })
 
 });
 
