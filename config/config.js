@@ -7,7 +7,7 @@ config.VALID_LINKS = [
 ];
 
 config.MANDATORY_HEADERS = [
-    "platform"
+    //"platform"
 ];
 
 module.exports = config;
