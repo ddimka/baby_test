@@ -16,6 +16,8 @@ router.post('/', function(req, res, next) {
     var image = req.body.image;
     var title = req.body.title;
     var type = req.body.type;
+    var date = req.body.date;
+    var family = req.headers.family;
 
     var errors = checkMandatoryFields();
     if (errors.length > 0)
@@ -24,7 +26,9 @@ router.post('/', function(req, res, next) {
     var eventObj = {
         title:title,
         type:type,
-        image:image
+        date:date,
+        image:image,
+        family:family
     };
 
     if (id){ // update
@@ -64,11 +68,25 @@ router.post('/', function(req, res, next) {
     }
 });
 
+router.get('/last', function(req, res, next) {
+
+    var familyId = req.headers.family;
+    var page = req.headers.page;
+
+    DBLogic.getLastEvents(familyId, page, function (err, user) {
+        if (err)
+            return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
+
+        return sendSuccess(res, user)
+    })
+
+});
+
 router.get('/:id', function(req, res, next) {
 
-    var userId = req.params.id;
+    var id = req.params.id;
 
-    DBLogic.getUserById(userId, function (err, user) {
+    DBLogic.getEventById(id, function (err, user) {
         if (err)
             return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
 

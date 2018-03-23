@@ -1,5 +1,6 @@
 var Logger = require('./Logger');
 var config = require('../config/config');
+var Constants = require('../config/constants');
 var dblogic = {};
 
 dblogic.findById = function (modelStr, id, callback) {
@@ -184,21 +185,32 @@ dblogic.updateRSS = function (id, newObjData, callback) {
 
 dblogic.getEventById = function (id, callback) {
 
-    var Model = require('../models/RSS_Site');
+    var Model = require('../models/Event');
     Model.findById(id, function (err, object) {
         return callback(err, object)
     })
 };
+
+dblogic.getLastEvents = function (familyId, page, callback) {
+
+    if (!page)
+        page = 0;
+    var Model = require('../models/Event');
+    Model.find({family:familyId}, function (err, object) {
+        return callback(err, object)
+    }).sort({"date" : -1}).limit(Constants.LAST_EVENTS_COUNT).skip(page * Constants.LAST_EVENTS_COUNT)
+};
+
 dblogic.getEventsByQuery = function (query, callback) {
 
-    var Model = require('../models/RSS_Site');
+    var Model = require('../models/Event');
     Model.find(query, function (err, object) {
         return callback(err, object)
     })
 };
 dblogic.updateEvent = function (id, newObjData, callback) {
 
-    var Model = require('../models/RSS_Site');
+    var Model = require('../models/Event');
 
     Model.findById(id, function (err, object) {
 

@@ -4,6 +4,8 @@ var constants = {};
 constants.GOOGLE_API_KEY = "AIzaSyA_V9TYNDKQPdebsUZT8uoy-bo6hbdtv58";
 constants.TOKEN_SECRET = "3sOydNR2M4fwc1fRwcPg1RhqhBrGi8jiqclMLMyu";*/
 
+constants.LAST_EVENTS_COUNT = 20;
+
 constants.LANGUAGES = {
     RUSSIAN: "RUSSIAN"
 };

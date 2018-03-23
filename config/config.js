@@ -7,7 +7,8 @@ config.VALID_LINKS = [
 ];
 
 config.MANDATORY_HEADERS = [
-    //"family"
+    "family",
+    "user"
 ];
 
 module.exports = config;

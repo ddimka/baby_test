@@ -3,6 +3,7 @@ var db = require('../config/db');
 var Event = db.model('Event', {
     title:            { type: String/*, required: true */},
     image:            { type: String/*, required: true */},
+    date:             { type: Date/*, required: true */},
     type:             { type: String/*, required: true */},
     likes:            { type: Number/*, required: true */},
     family:           { type: String/*, required: true */},
