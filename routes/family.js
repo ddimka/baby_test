@@ -14,19 +14,19 @@ router.post('/', function(req, res, next) {
     var id = req.body.id;
 
     var image = req.body.image;
-    var title = req.body.title;
+    var name = req.body.name;
 
     var errors = checkMandatoryFields();
     if (errors.length > 0)
         return sendError(res, Error.VALIDATION_ERROR, errors);
 
     var eventObj = {
-        title:title,
+        name:name,
         image:image
     };
 
     if (id){ // update
-        DBLogic.updateEvent(id, eventObj, function (err, updatedObject) {
+        DBLogic.updateFamily(id, eventObj, function (err, updatedObject) {
             if (err)
                 return sendError(res, Error.SERVER_ERROR_SAVING_TO_DATABASE, err.message);
 
@@ -45,8 +45,8 @@ router.post('/', function(req, res, next) {
     function checkMandatoryFields() {
         var errorsArray = [];
 
-        if (!title)
-            errorsArray.push("title is required");
+        if (!name)
+            errorsArray.push("name is required");
 
         return errorsArray;
     }
@@ -57,6 +57,19 @@ router.get('/:id', function(req, res, next) {
     var userId = req.params.id;
 
     DBLogic.getFamilyById(userId, function (err, user) {
+        if (err)
+            return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
+
+        return sendSuccess(res, user)
+    })
+
+});
+
+router.post('/search/by/name', function(req, res, next) {
+
+    var name = req.body.name;
+
+    DBLogic.getFamilyByLikeName(name, function (err, user) {
         if (err)
             return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
 

@@ -202,9 +202,8 @@ dblogic.updateEvent = function (id, newObjData, callback) {
 
     Model.findById(id, function (err, object) {
 
-        if (object === null) {
-            callback("id " + id + " not exists", null);
-        } else if (err) {
+
+        if (err) {
             callback(err);
         } else {
 
@@ -250,5 +249,14 @@ dblogic.updateFamily = function (id, newObjData, callback) {
         }
     })
 };
+dblogic.getFamilyByLikeName = function (name, callback) {
 
+    var regex = new RegExp(name, "i")
+        , query   = { name: regex };
+
+    var Model = require('../models/Family');
+    Model.find(query, function (err, object) {
+        return callback(err, object)
+    })
+};
 module.exports = dblogic;

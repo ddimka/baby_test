@@ -10,7 +10,8 @@ constants.LANGUAGES = {
 
 constants.COUNTRIES = {
     RUSSIA: "RUSSIA",
-    ISRAEL: "ISRAEL"
+    ISRAEL: "ISRAEL",
+    UKRAINE: "UKRAINE"
 };
 
 constants.EVENT_TYPE = {
