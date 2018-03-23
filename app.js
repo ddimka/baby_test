@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 const log4js = require('log4js');
 const logger2 = log4js.getLogger();
 const Logger = require('./tools/Logger');
+const Errors = require('./config/errors');
+const Config = require('./config/config');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -31,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*global.sendError = function (res, error, message, stack) {
+global.sendError = function (res, error, message, stack) {
     var response = {
         success: false,
         err: error
@@ -52,7 +54,7 @@ global.sendSuccess = function (res, result, code) {
     if (code)
         response.code = code;
     res.status(200).json(response);
-};*/
+};
 
 app.use(function (req, res, next) {
 
@@ -73,28 +75,27 @@ app.use(function (req, res, next) {
     next();
 });
 
-/*
+
 app.use(function (req, res, next) {
 
     if (req.originalUrl === "/check") {
         return sendSuccess(res, "Success");
     }else{
         if (req.method !== "OPTIONS" && req.method !== 'HEAD') {
-/!*            Logger.fatal("----------------------------------------------------");
+            Logger.fatal("----------------------------------------------------");
             Logger.fatal("IP address: " + req.headers['x-forwarded-for']);
             Logger.fatal("URL: " + req.method + " " + req.originalUrl);
             Logger.fatal("Admin: " + req.headers.admin);
             Logger.fatal("Platform: " + req.headers.platform);
             Logger.fatal("Apiary: " + req.headers.apiary);
-            if (req.method === "POST" && req.originalUrl !== "/api/admin/permissions")
-                Logger.warn("Body: " + JSON.stringify(req.body, null, 4));
-            Logger.fatal("----------------------------------------------------");*!/
+            Logger.warn("Body: " + JSON.stringify(req.body, null, 4));
+            Logger.fatal("----------------------------------------------------");
         }else
             return next();
 
-/!*        if (req.headers.apiary === "3sOydN3sOyd3sOydNR3sOydNR2M4fwc1fRwcPg1RhqhBrGi8jiqclMLMyuLMyui8jiqclMLMyurGi8jiqclMLMyu") {
+        if (req.headers.apiary === "3sOydN3sOyd3sOydNR3sOydNR2M4fwc1fRwcPg1RhqhBrGi8jiqclMLMyuLMyui8jiqclMLMyurGi8jiqclMLMyu") {
             return next();
-        }*!/
+        }
 
         validateRequest();
     }
@@ -108,12 +109,12 @@ app.use(function (req, res, next) {
             return next();
         }else {
             Logger.error("Wrong request headers");
-            res.status(404).json({success: false, /!*err: Errors.REQUEST_HEADERS_MISSING*!/})
+            res.status(404).json({success: false, err: Errors.REQUEST_HEADERS_MISSING})
         }
 
         function validateLinks() {
 
-            const urlsWithoutHeaders = config.VALID_LINKS;
+            const urlsWithoutHeaders = Config.VALID_LINKS;
             var isValid = false;
             for (var i = 0; i < urlsWithoutHeaders.length; i++) {
                 if (req.originalUrl === urlsWithoutHeaders[i]) {
@@ -126,7 +127,7 @@ app.use(function (req, res, next) {
 
         function validateHeaders() {
             var correctHeadersCount = 0;
-            const neededHeaders = config.MANDATORY_HEADERS;
+            const neededHeaders = Config.MANDATORY_HEADERS;
             for (var i = 0; i < neededHeaders.length; i++) {
                 if (req.headers[neededHeaders[i]])
                     correctHeadersCount++;
@@ -136,7 +137,7 @@ app.use(function (req, res, next) {
     }
 
 });
-*/
+
 
 app.use('/', index);
 app.use('/users', users);

@@ -6,20 +6,20 @@ var User = require("../models/User");
 
 var router = express.Router();
 
-/* GET users listing. */
+/* Create user */
 router.post('/', function(req, res, next) {
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
 
     var birthday = req.body.birthday;
-    var image = req.body.image;
+    var picture = req.body.picture;
     var email = req.body.email;
 
     var userObj = {
         first_name:first_name,
         last_name:last_name,
         birthday:birthday,
-        image:image,
+        image:picture,
         email:email
     };
 
@@ -30,7 +30,6 @@ router.post('/', function(req, res, next) {
         return sendSuccess(res, "Success", createdObject);
     });
 
-
     var errors = checkMandatoryFields();
     if (errors.length > 0)
         return sendError(res, 0, errors);
@@ -39,6 +38,17 @@ router.post('/', function(req, res, next) {
         var errorsArray = [];
         return errorsArray;
     }
+});
+
+router.get('/:id', function(req, res, next) {
+
+    var userId = req.params.id;
+
+    DBLogic.findById("User", userId, function (err, user) {
+
+        return sendSuccess(res, user);
+    });
+
 });
 
 module.exports = router;
