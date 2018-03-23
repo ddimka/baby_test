@@ -106,7 +106,6 @@ dblogic.save = function (obj, isNew, callback) {
 
 };
 
-
 dblogic.getUserById = function (id, callback) {
 
     var Model = require('../models/User');
@@ -114,12 +113,141 @@ dblogic.getUserById = function (id, callback) {
         return callback(err, object)
     })
 };
-
 dblogic.getUsersByQuery = function (query, callback) {
 
     var Model = require('../models/User');
     Model.find(query, function (err, object) {
         return callback(err, object)
+    })
+};
+dblogic.updateUser = function (id, newObjData, callback) {
+
+    var Model = require('../models/User');
+
+    Model.findById(id, function (err, object) {
+
+        if (object === null) {
+            callback("id " + id + " not exists", null);
+        } else if (err) {
+            callback(err);
+        } else {
+
+            object.UT = new Date;
+
+            for (var key in newObjData) {
+                object[key] = newObjData[key];
+            }
+            object.save(function (err, row) {
+                callback(err, row);
+            })
+        }
+    })
+};
+
+dblogic.getRSSById = function (id, callback) {
+
+    var Model = require('../models/RSS_Site');
+    Model.findById(id, function (err, object) {
+        return callback(err, object)
+    })
+};
+dblogic.getRSSsByQuery = function (query, callback) {
+
+    var Model = require('../models/RSS_Site');
+    Model.find(query, function (err, object) {
+        return callback(err, object)
+    })
+};
+dblogic.updateRSS = function (id, newObjData, callback) {
+
+    var Model = require('../models/RSS_Site');
+
+    Model.findById(id, function (err, object) {
+
+        if (object === null) {
+            callback("id " + id + " not exists", null);
+        } else if (err) {
+            callback(err);
+        } else {
+
+            object.UT = new Date;
+
+            for (var key in newObjData) {
+                object[key] = newObjData[key];
+            }
+            object.save(function (err, row) {
+                callback(err, row);
+            })
+        }
+    })
+};
+
+dblogic.getEventById = function (id, callback) {
+
+    var Model = require('../models/RSS_Site');
+    Model.findById(id, function (err, object) {
+        return callback(err, object)
+    })
+};
+dblogic.getEventsByQuery = function (query, callback) {
+
+    var Model = require('../models/RSS_Site');
+    Model.find(query, function (err, object) {
+        return callback(err, object)
+    })
+};
+dblogic.updateEvent = function (id, newObjData, callback) {
+
+    var Model = require('../models/RSS_Site');
+
+    Model.findById(id, function (err, object) {
+
+        if (object === null) {
+            callback("id " + id + " not exists", null);
+        } else if (err) {
+            callback(err);
+        } else {
+
+            object.UT = new Date;
+
+            for (var key in newObjData) {
+                object[key] = newObjData[key];
+            }
+            object.save(function (err, row) {
+                callback(err, row);
+            })
+        }
+    })
+};
+
+dblogic.getFamilyById = function (id, callback) {
+
+    var Model = require('../models/Family');
+    Model.findById(id, function (err, object) {
+        return callback(err, object)
+    })
+};
+dblogic.updateFamily = function (id, newObjData, callback) {
+
+    var Model = require('../models/Family');
+
+    Model.findById(id, function (err, object) {
+
+        if (object === null) {
+            callback("id " + id + " not exists", null);
+        } else if (err) {
+            callback(err);
+        } else {
+
+            object.UT = new Date;
+
+            for (var key in newObjData) {
+                object[key] = newObjData[key];
+            }
+            object.save(function (err, row) {
+                callback(err, row);
+            })
+        }
     })
 };
 

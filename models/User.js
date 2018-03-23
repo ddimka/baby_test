@@ -6,6 +6,9 @@ var User = db.model('User', {
     birthday:         { type: Date/*, required: true */},
     picture:          { type: String/*, required: true */},
     email:            { type: String/*, required: true */},
+    families:         { type: [String]/*, required: true */},
+    rss_channels:     { type: [String]/*, required: true */},
+    is_admin:         { type: Boolean/*, required: true */},
 
     AC:               { type: Boolean/*, required: true */},
     CT:               { type: Date/*, required: true */},

@@ -13,6 +13,9 @@ const Config = require('./config/config');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var info = require('./routes/info');
+var rss = require('./routes/rss');
+var event = require('./routes/event');
+var family = require('./routes/family');
 
 var app = express();
 
@@ -47,13 +50,13 @@ global.sendError = function (res, error, message, stack) {
     res.status(400).json(response);
 };
 
-global.sendSuccess = function (res, result, code) {
+global.sendSuccess = function (res, result, data) {
     var response = {
         success: true,
         result: result
     };
-    if (code)
-        response.code = code;
+    if (data)
+        response.data = data;
     res.status(200).json(response);
 };
 
@@ -141,8 +144,11 @@ app.use(function (req, res, next) {
 
 
 app.use('/', index);
-app.use('/users', users);
-app.use('/info', info);
+app.use('/api/users', users);
+app.use('/api/info', info);
+app.use('/api/rss', rss);
+app.use('/api/family', family);
+app.use('/api/event', event);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

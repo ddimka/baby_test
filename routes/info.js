@@ -19,6 +19,7 @@ router.get('/birthdays', function(req, res, next) {
                 id: users[i]._id.toString(),
                 first_name: users[i].first_name,
                 last_name: users[i].last_name,
+                picture: users[i].picture,
                 birthday: users[i].birthday
             });
 
