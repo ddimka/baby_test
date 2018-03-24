@@ -1,6 +1,7 @@
 var express = require('express');
 var DBLogic = require("../tools/DBlogic");
 var db = require('../config/db');
+var Error = require('../config/errors');
 
 var User = require("../models/User");
 
@@ -29,7 +30,8 @@ router.post('/', function(req, res, next) {
         picture:picture,
         email:email,
         rss_channels: rssChannels,
-        is_admin: isAdmin
+        is_admin: isAdmin,
+        logout: false
     };
 
     if (id){ // update
@@ -77,6 +79,69 @@ router.get('/:id', function(req, res, next) {
 
         return sendSuccess(res, user)
     })
+
+});
+
+router.post('/associate', function(req, res, next) {
+
+    var userId = req.body.user;
+    var familyId = req.body.family;
+
+    var errors = checkMandatoryFields();
+    if (errors.length > 0)
+        return sendError(res, Error.VALIDATION_ERROR, errors);
+
+    checkIfFamilyExists(familyId, function (err, isExists) {
+        if (err)
+            return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
+        if (!isExists)
+            return sendError(res, err, Error.FAMILY_NOT_EXISTS);
+
+        checkIfUserExists(userId, function (err, isExists) {
+            if (err)
+                return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
+            if (!isExists)
+                return sendError(res, null, Error.USER_NOT_EXISTS);
+
+            DBLogic.associateUserToFamily(userId, familyId, function (err, user) {
+                if (err)
+                    return sendError(res, null, Error.SERVER_ERROR_READING_FROM_DATABASE);
+
+                return sendSuccess(res, "Success")
+            });
+        })
+    });
+
+    function checkIfFamilyExists(family, callback) {
+        DBLogic.getFamilyById(family, function (err, familyObj) {
+            if (err)
+                return callback(err);
+            if (!familyObj)
+                return callback(null, false);
+
+            return callback(null, true);
+        })
+    };
+    function checkIfUserExists(user, callback) {
+        DBLogic.getUserById(user, function (err, familyObj) {
+            if (err)
+                return callback(err);
+            if (!familyObj)
+                return callback(null, false);
+
+            return callback(null, true);
+        });
+    };
+
+    function checkMandatoryFields() {
+        var errorsArray = [];
+
+        if (!userId)
+            errorsArray.push("user is required");
+        if (!familyId)
+            errorsArray.push("family is required");
+        return errorsArray;
+    }
 
 });
 

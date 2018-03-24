@@ -19,6 +19,7 @@ errors.SERVER_ERROR_SAVING_TO_DATABASE =         {code: 101, message: "Server sa
 errors.SERVER_ERROR_UPDATING =                   {code: 102, message: "Server updating error"};
 errors.SERVER_ERROR_DELETING =                   {code: 103, message: "Server deleting error"};
 
+
 //Required
 errors.IMAGE_REQUIRED =                          {code: 200, message: "Image file required"};
 errors.DOCUMENT_REQUIRED =                       {code: 201, message: "Document file required"};
@@ -39,8 +40,11 @@ errors.MUNI_LOCAL_GEO_POINT_ALREADY_EXISTS =     {code: 308, message: "Municipal
 errors.ADVISER_COMPANY_ALREADY_EXISTS =          {code: 309, message: "Adviser company already exists"};
 
 // Not exists
-errors.ADMIN_NOT_EXISTS =                        {code: 400, message: "Admin not exists"};
-errors.SITE_NOT_EXISTS =                         {code: 401, message: "Site not exists"};
+errors.USER_NOT_EXISTS =                         {code: 400, message: "User not exists"};
+errors.FAMILY_NOT_EXISTS =                       {code: 401, message: "Family not exists"};
+
+
+
 errors.PROJECT_NOT_EXISTS =                      {code: 402, message: "Project not exists"};
 errors.MUNI_NOT_EXISTS =                         {code: 403, message: "Municipality not exists"};
 errors.QUESTIONNAIRE_NOT_EXISTS =                {code: 404, message: "Questionnaire not exists"};
@@ -52,7 +56,6 @@ errors.NO_SETTINGS =                             {code: 409, message: "No settin
 errors.NO_LOGS =                                 {code: 410, message: "No logs"};
 errors.NO_TOKEN =                                {code: 411, message: "No token"};
 errors.NO_ADVISER_COMPANY =                      {code: 412, message: "No adviser company"};
-
 
 // Password
 errors.PASSWORD_ERROR_CHECKING =                 {code: 500, message: "Can't check password"};

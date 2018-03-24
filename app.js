@@ -40,8 +40,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 global.sendError = function (res, error, message, stack) {
     var response = {
         success: false,
-        err: error
+        //err: error
     };
+    if (error)
+        response.err = error;
+    else
+        response.err = {};
     if (message)
         response.err.message = message;
     Logger.error(JSON.stringify(response, null, 4));

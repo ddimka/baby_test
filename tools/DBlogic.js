@@ -144,6 +144,15 @@ dblogic.updateUser = function (id, newObjData, callback) {
         }
     })
 };
+dblogic.associateUserToFamily = function (user, family, callback) {
+
+    var Model = require('../models/User');
+
+    Model.update({_id: user}, { $push: { families: family }}, function (err, object) {
+
+        callback(err, object);
+    })
+};
 
 dblogic.getRSSById = function (id, callback) {
 

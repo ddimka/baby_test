@@ -65,6 +65,19 @@ router.get('/:id', function(req, res, next) {
 
 });
 
+router.get('/:id/users', function(req, res, next) {
+
+    var familyId = req.params.id;
+
+    DBLogic.getUsersByQuery({families: familyId}, function (err, user) {
+        if (err)
+            return sendError(res, err, Error.SERVER_ERROR_READING_FROM_DATABASE);
+
+        return sendSuccess(res, user)
+    })
+
+});
+
 router.post('/search/by/name', function(req, res, next) {
 
     var name = req.body.name;
