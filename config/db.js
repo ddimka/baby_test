@@ -1,9 +1,7 @@
-var mongoose = require('mongoose')
-var config = require('./config');
-var Logger = require('../tools/Logger');
+var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.db_link, function (err) {
+mongoose.connect(Config.db_link, function (err) {
 
     if (err) {
         Logger.error('Unable to connect to the Mongo server. Error:', err);

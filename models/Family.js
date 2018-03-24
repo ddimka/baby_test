@@ -1,6 +1,4 @@
-var db = require('../config/db');
-
-var Family = db.model('Family', {
+var Family = DBConnector.model('Family', {
     name:             { type: String/*, required: true */},
     image:            { type: String/*, required: true */},
 

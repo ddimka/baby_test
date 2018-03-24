@@ -6,9 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const log4js = require('log4js');
 const logger2 = log4js.getLogger();
-const Logger = require('./tools/Logger');
-const Errors = require('./config/errors');
-const Config = require('./config/config');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -18,6 +16,25 @@ var event = require('./routes/event');
 var family = require('./routes/family');
 
 var app = express();
+
+importClasses();
+
+function importClasses() {
+    global.Config = require('./config/config');
+    global.Constants = require('./config/constants');
+    global.DBConnector = require('./config/db');
+
+    global.Logger = require('./tools/Logger');
+    global.Errors = require('./config/errors');
+
+    global.DBLogic = require("./tools/DBlogic");
+
+
+    global.User = require("./models/User");
+    global.Family = require("./models/Family");
+    global.Event = require("./models/Event");
+    global.RSS_Site = require("./models/RSS_Site");
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

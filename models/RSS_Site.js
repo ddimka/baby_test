@@ -1,6 +1,4 @@
-var db = require('../config/db');
-
-var RSS_Site = db.model('RSS_Site', {
+var RSS_Site = DBConnector.model('RSS_Site', {
     name:             { type: String/*, required: true */},
     url:              { type: String/*, required: true */},
     image:            { type: String/*, required: true */},

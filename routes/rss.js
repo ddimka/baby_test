@@ -1,12 +1,4 @@
 var express = require('express');
-var DBLogic = require("../tools/DBlogic");
-var Constants = require("../config/constants");
-var Error = require("../config/errors");
-var db = require('../config/db');
-
-var User = require("../models/User");
-var RSS_Site = require("../models/RSS_Site");
-
 var router = express.Router();
 
 /* Create rss channel */

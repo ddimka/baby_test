@@ -1,11 +1,4 @@
 var express = require('express');
-var DBLogic = require("../tools/DBlogic");
-var Constants = require("../config/constants");
-var Error = require("../config/errors");
-var db = require('../config/db');
-
-var Event = require("../models/Event");
-
 var router = express.Router();
 
 /* Create event */

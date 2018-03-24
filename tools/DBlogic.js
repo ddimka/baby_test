@@ -1,6 +1,3 @@
-var Logger = require('./Logger');
-var config = require('../config/config');
-var Constants = require('../config/constants');
 var dblogic = {};
 
 dblogic.findById = function (modelStr, id, callback) {
@@ -36,7 +33,7 @@ dblogic.findWithPage = function (modelStr, queue, page, callback) {
 
     Model.find(queue, function (err, objects) {
         callback(err, objects);
-    }).limit(config.CRUD_PAGE_SIZE).skip(page * config.CRUD_PAGE_SIZE);
+    }).limit(Сonfig.CRUD_PAGE_SIZE).skip(page * Сonfig.CRUD_PAGE_SIZE);
 
 };
 dblogic.findOne = function (modelStr, queue, callback) {

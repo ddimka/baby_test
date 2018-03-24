@@ -1,6 +1,4 @@
-var db = require('../config/db');
-
-var Event = db.model('Event', {
+var Event = DBConnector.model('Event', {
     title:            { type: String/*, required: true */},
     image:            { type: String/*, required: true */},
     date:             { type: Date/*, required: true */},

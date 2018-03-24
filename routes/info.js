@@ -1,9 +1,4 @@
 var express = require('express');
-var DBLogic = require("../tools/DBlogic");
-var db = require('../config/db');
-
-var User = require("../models/User");
-
 var router = express.Router();
 
 router.get('/birthdays', function(req, res, next) {

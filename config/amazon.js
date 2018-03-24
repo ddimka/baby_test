@@ -1,9 +1,9 @@
-let amazon = {};
-let AWS = require('aws-sdk');
+var amazon = {};
+var AWS = require('aws-sdk');
 
-let AWS_KEY_ID = "AKIAIGNN6MME7DABIWEQ";
-let AWS_SECRET_KEY = "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";
-let S3_BUCKET = 'm-bakara';
+var AWS_KEY_ID = "AKIAIGNN6MME7DABIWEQ";
+var AWS_SECRET_KEY = "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";
+var S3_BUCKET = 'm-bakara';
 
 
 
